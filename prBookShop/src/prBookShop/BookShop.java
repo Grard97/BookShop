@@ -12,19 +12,7 @@ public class BookShop {
 	
 	public void addBook(String author, String title, double price) {
 		Book newBook = new Book(author, title, price);
-		int i = 0;
-		while (author != this.bookArr[i].getAuthor()  && title != this.bookArr[i].getTitle() && i< numBooks) {
-			++i;
-		}
-
-		if (i == numBooks) {
-			System.arraycopy(this.bookArr, 0, this.bookArr, 0, numBooks*2); 
-			this.bookArr[numBooks+1] = newBook; 
-			numBooks++;
-			}
-		else {
-			this.bookArr[i] = newBook;
-		} 
+		addBook(newBook);
 	}
 	
 	
@@ -68,6 +56,20 @@ public class BookShop {
 			res += this.bookArr[i].toString() + ", \n";
 		}
 		return res;
+	}
+	
+	private void addBook (Book book) {
+		int i = 0;
+		while (i < numBooks && book.getAuthor() != bookArr[i].getAuthor() && book.getTitle() != bookArr[i].getTitle()) {++i;}
+		if (i == numBooks) {
+			if (numBooks == bookArr.length) System.arraycopy(bookArr, 0, bookArr, 0, bookArr.length*2);
+			bookArr[numBooks+1] = book;
+			numBooks++;
+		}
+		else {
+			bookArr[i] = book; 
+		
+		}
 	}
 	
 }
