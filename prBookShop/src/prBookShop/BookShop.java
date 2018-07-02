@@ -12,7 +12,10 @@ public class BookShop {
 	
 	public void addBook(String author, String title, double price) {
 		Book newBook = new Book(author, title, price);
+		if (newBook == null) System.err.println("El objeto es nulo");
+		else {
 		addBook(newBook);
+		}
 	}
 	
 	
@@ -50,21 +53,22 @@ public class BookShop {
 	}
 	
 	public String toString() {
-		String res = "";
+		String res ="";			
 		int i = 0;
-		while (i<numBooks) {
+		while (i<=numBooks) {
 			res += this.bookArr[i].toString() + ", \n";
+			System.err.println("hehe");		//edit
+			++i;
 		}
 		return res;
 	}
 	
 	private void addBook (Book book) {
 		int i = 0;
-		while (i < numBooks && book.getAuthor() != bookArr[i].getAuthor() && book.getTitle() != bookArr[i].getTitle()) {++i;}
-		if (i == numBooks) {
-			if (numBooks == bookArr.length) System.arraycopy(bookArr, 0, bookArr, 0, bookArr.length*2);
+		while (i < numBooks && book.getAuthor() != bookArr[i].getAuthor() && book.getTitle() != bookArr[i].getTitle()) {++i;}	
+			if (numBooks == bookArr.length) { System.arraycopy(bookArr, 0, bookArr, 0, bookArr.length*2);
 			bookArr[numBooks+1] = book;
-			numBooks++;
+			this.numBooks++;
 		}
 		else {
 			bookArr[i] = book; 
